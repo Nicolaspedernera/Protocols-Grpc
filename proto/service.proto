@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package serviceTest;
+
+service requestResponse {
+    rpc request(userRequest) returns (serverResponse) {};
+    rpc RandomNumbers(numberRequest) returns ( stream numberResponse){};
+    rpc todoList(stream todoRequest) returns (todoResponse){};
+    rpc chat(stream chat) returns (stream chatResponse){}; // conexion bireccional....
+
+}
+
+message userRequest {
+    string message = 1;
+}
+
+message serverResponse {
+    string message = 1;
+}
+
+message numberRequest{
+    int32 maxVal = 1;
+}
+
+message numberResponse{
+    int32 num = 1; 
+}
+
+message todoRequest{
+    string todo = 1 ; 
+    string status = 2 ; 
+}
+
+message todoResponse{
+    repeated todoRequest todos = 1 ; 
+}
+
+message chat {
+    string message = 1; 
+}
+message chatResponse {
+    string userName=1;
+    string message =2; 
+}
